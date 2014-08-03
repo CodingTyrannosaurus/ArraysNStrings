@@ -1,5 +1,13 @@
 import java.util.Scanner;
-
+/**
+ * Really simple text compression. :D
+ * 
+ * @author pbhatnagar
+ * If you have any questions or comments, please feel free to contact
+ * me at pbhatnagar3@gatech.edu
+ *
+ * MAY THE FORCE OF COMPILER BE WITH YOU. :D
+ */
 
 public class TextCompression {
 
