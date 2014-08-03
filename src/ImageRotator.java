@@ -11,11 +11,38 @@ import java.util.Scanner;
  */
 public class ImageRotator {
 	
-	public int[][] rotateMe(int[][] input){
-		
+	public static int[][] rotateMe(int[][] input, int size, int depth){
+	if(depth + 1 >= size - 1)
 		return input;
+	//there is a two by two array inside
+//	else if(size - depth* 2 == 2){
+		
+		
+//	}
+		
+//		int[] buffer = new int[size];
+		//backing up the left most column
+		for(int i = 0; i < size - depth * 2 - 1 ; i++){
+			int buffer = input[i + depth][ depth];
+			input[i + depth][depth] = input[size-1 - depth][depth + i];
+			printMe(input);
+			input[size - 1 - depth][depth + i] = input[size - 1 - i - depth][size-1 - depth];
+			printMe(input);
+			input[size - i - 1 - depth][size - 1 - depth] = input[depth][size - 1 - i - depth];
+			printMe(input);
+			input[depth][size - 1 - i - depth] = buffer;
+			printMe(input);
+			
+		}
+		
+		return rotateMe(input, size, ++depth);
 	}
 
+	public static void printMe(int input[]){
+		for(int i = 0; i < input.length; i++){
+			System.out.print(input[i] + " ");
+		}
+	}
 	public static void printMe(int[][] input){
 		System.out.println();
 		for(int i = 0; i < input.length; i++){
@@ -32,12 +59,12 @@ public class ImageRotator {
 		System.out.println("Enter the size of square image");
 		int size = scan.nextInt();
 		int[][] input = new int[size][size];
+		String inputLine;
 		scan.nextLine();
 		String[] inputArray;
 		for(int i = 0; i < size; i++){
-			System.out.print("Enter the " + i +" line separated with spaces");
-			String inputLine = scan.nextLine();
-			System.out.println(inputLine);
+			System.out.println("Enter the " + i +" line separated with spaaces");
+			inputLine = scan.nextLine();
 			inputArray = inputLine.split(" ");
 			for(int j = 0; j < size; j++){
 				input[i][j] = Integer.parseInt(inputArray[j]);
@@ -46,5 +73,6 @@ public class ImageRotator {
 		
 		System.out.println("You entered the following ");
 		printMe(input);
+		printMe(rotateMe(input, size, 0));
 	}
 }
